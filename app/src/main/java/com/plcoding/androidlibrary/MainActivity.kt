@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.plcoding.androidlibrary.ui.theme.AndroidLibraryTheme
 import com.plcoding.image_preview.ImagePreview
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +21,18 @@ class MainActivity : ComponentActivity() {
             AndroidLibraryTheme {
                 Box(modifier = Modifier.fillMaxSize()) {
                     ImagePreview(image = painterResource(id = R.drawable.kermit),
-                       description = "Hello Mahendra",
+                       description = "Hello  !!",
                         modifier = Modifier.align(Alignment.Center)
                             .size(150 .dp)
                         )
+                    ImagePreview(image = painterResource(id = R.drawable.kermit),
+                        description = "Hello   2!!",
+                        modifier = Modifier.align(Alignment.TopStart)
+                            .size(150 .dp)
+                    )
                 }
             }
+
         }
     }
 }
