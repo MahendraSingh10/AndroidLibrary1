@@ -52,7 +52,7 @@ afterEvaluate {
 
                 groupId = 'com.github.MahendraSingh10'
                 artifactId = 'image-preview-compose'
-                version = '1.0'
+                version = '1.1'
             }
         }
     }
