@@ -1,5 +1,7 @@
 package com.plcoding.image_preview
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -61,4 +63,15 @@ fun ImagePreview(
                 .padding(8.dp)
         )
     }
+}
+
+
+@Composable
+fun ShowCustomMessage(context: Context, message: String){
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+@Composable
+fun ShowCustomTextBox(desc: String){
+    Text(text = desc, modifier = Modifier.size(150.dp).height(20.dp).width(100.dp))
 }

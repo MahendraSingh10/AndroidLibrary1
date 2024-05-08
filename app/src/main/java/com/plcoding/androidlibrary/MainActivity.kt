@@ -12,27 +12,37 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.plcoding.androidlibrary.ui.theme.AndroidLibraryTheme
 import com.plcoding.image_preview.ImagePreview
+import com.plcoding.image_preview.ShowCustomMessage
+import com.plcoding.image_preview.ShowCustomTextBox
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             AndroidLibraryTheme {
                 Box(modifier = Modifier.fillMaxSize()) {
+                    //ShowCustomTextBox(desc="Name")
                     ImagePreview(image = painterResource(id = R.drawable.kermit),
                        description = "Hello  !!",
-                        modifier = Modifier.align(Alignment.Center)
-                            .size(150 .dp)
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(150.dp)
                         )
                     ImagePreview(image = painterResource(id = R.drawable.kermit),
                         description = "Hello   2!!",
-                        modifier = Modifier.align(Alignment.TopStart)
-                            .size(150 .dp)
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                            .size(150.dp)
                     )
                 }
             }
 
         }
+        //setContent{
+            //ShowCustomMessage(context = this, message = "Hello Testing !!")
+            //ShowCustomTextBox(desc="Name")
+        //}
     }
 }
