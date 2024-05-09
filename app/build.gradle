@@ -10,7 +10,7 @@ android {
         applicationId "com.plcoding.androidlibrary"
         minSdk 21
         versionCode 1
-        versionName "1.1"
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
