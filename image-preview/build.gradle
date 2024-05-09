@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdk 21
         versionCode 1
-        versionName "1.0"
+        versionName "1.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -52,7 +52,7 @@ afterEvaluate {
 
                 groupId = 'com.github.MahendraSingh10'
                 artifactId = 'image-preview-compose'
-                version = '1.4'
+                version = '1.3'
             }
         }
     }
