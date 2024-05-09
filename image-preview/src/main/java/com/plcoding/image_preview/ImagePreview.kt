@@ -7,14 +7,23 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Checkbox
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +34,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 
 @Composable
 fun ImagePreview(
@@ -34,6 +45,7 @@ fun ImagePreview(
     contentDescription: String = "",
     onImageClick: () -> Unit = {}
 ) {
+
     Box(
         modifier = modifier
             .aspectRatio(1f)
@@ -90,6 +102,11 @@ fun generateForm(context:Context,
                  onFormSubmitCallback: (Context) -> Unit = {},
                  onFormbackCallback: (Context) -> Unit = {}){
 
+    var consumerName by rememberSaveable { mutableStateOf("") }
+    var businessPartner by rememberSaveable { mutableStateOf("") }
+    var address by rememberSaveable { mutableStateOf("") }
+
+
     Column(
         modifier = Modifier
             .border(5.dp, color = Color.Magenta)
@@ -106,14 +123,14 @@ fun generateForm(context:Context,
 
                 Text(
                     text = "Consumer Name",
-                    style = MaterialTheme.typography.h3
+                    style = MaterialTheme.typography.h5
                 )
 
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = "",
-                    onValueChange = { it },
-                    placeholder = { Text(text = "e.g. Mahendra Singh") },
+                    value = consumerName,
+                    onValueChange = { consumerName = it },
+                    placeholder = { Text(text = "e.g. Consumer Name") },
                 )
             }
         }
@@ -124,12 +141,12 @@ fun generateForm(context:Context,
 
                 Text(
                     text = "Business Partner",
-                    style = MaterialTheme.typography.h3
+                    style = MaterialTheme.typography.h5
                 )
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = "",
-                    onValueChange = { it },
+                    value = businessPartner,
+                    onValueChange = { businessPartner = it },
                     placeholder = { Text(text = "e.g. Business Partner") },
                 )
             }
@@ -141,12 +158,12 @@ fun generateForm(context:Context,
 
                 Text(
                     text = "Address",
-                    style = MaterialTheme.typography.h3
+                    style = MaterialTheme.typography.h5
                 )
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = "",
-                    onValueChange = { it },
+                    value = address,
+                    onValueChange = { address = it },
                     placeholder = { Text(text = "e.g. Address") },
                 )
             }
@@ -182,3 +199,66 @@ fun generateForm(context:Context,
     }
 
 }
+
+
+@Composable
+fun TodoView(vm: TodoViewModel, onBackButtonClick: () -> Unit = {}) {
+    LaunchedEffect(Unit, block = {
+        vm.getTodoList()
+    })
+
+    Scaffold(
+        topBar = {
+            TopAppBar(title = {
+                Row {
+                    Text("Todos")
+                    Button(onClick = {
+                        onBackButtonClick()
+                    }) {
+                        Text("Click to Back")
+                    }
+                }
+            })
+        },
+        content = {
+            if(vm.errorMessage.isEmpty()){
+                Column(modifier = Modifier.padding(15.dp)) {
+                    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                        items(vm.todoList){
+                                todo ->
+                            Column {
+                                Row(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(5.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween) {
+                                    Box(   modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(0.dp, 0.dp, 16.dp, 0.dp) ){
+                                        Checkbox(checked = todo.completed, onCheckedChange = null)
+                                        Spacer(modifier = Modifier.width(16.dp))
+                                        Text(
+                                            modifier = Modifier.padding(start = 10.dp),
+                                            text = todo.title, maxLines = 2,
+                                            overflow = TextOverflow.Ellipsis)
+
+
+                                    }
+                                    Divider()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Text(vm.errorMessage)
+            }
+        }
+    )
+
+
+}
+
+
+
