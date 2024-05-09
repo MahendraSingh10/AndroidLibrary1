@@ -42,6 +42,9 @@ android {
 dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.0.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-android:2.8.0-rc01'
 }
 
 afterEvaluate {
@@ -52,7 +55,7 @@ afterEvaluate {
 
                 groupId = 'com.github.MahendraSingh10'
                 artifactId = 'image-preview-compose'
-                version = '1.2'
+                version = '1.3'
             }
         }
     }
